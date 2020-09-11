@@ -1,3 +1,12 @@
+# Project-Specific ignores
+*.tlog
+*.log
+Debug/
+Release/
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+
 # Prerequisites
 *.d
 
