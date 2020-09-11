@@ -32,14 +32,24 @@ void Game::initWindow() {
 	this->window->setVerticalSyncEnabled(vertical_sync_enabled);
 }
 
+void Game::initStates() {
+	this->states.push(new GameState(this->window));
+}
+
 // Constructors / Destructors
 
 Game::Game() {
 	this->initWindow();
+	this->initStates();
 }
 
 Game::~Game() {
 	delete this->window;
+
+	while (this->states.empty()) {
+		delete this->states.top();
+		this->states.pop();
+	}
 }
 
 // Functions
@@ -48,9 +58,6 @@ void Game::updateDt() {
 	// Updates the dt variable with the time it takes to update and render one frame.
 
 	this->dt = this->dtClock.restart().asSeconds();
-
-	system("cls");
-	std::cout << this->dt << std::endl;
 }
 
 void Game::updateSFMLEvents() {
@@ -65,12 +72,18 @@ void Game::update() {
 	// Update all SFML events
 
 	this->updateSFMLEvents();
+
+	if (!this->states.empty())
+		this->states.top()->update(this->dt);
 }
 
 void Game::render() {
 	this->window->clear();
 
 	// Render Items
+
+	if (this->states.empty())
+		this->states.top()->render(this->window);
 
 	this->window->display();
 }
