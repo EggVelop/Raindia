@@ -31,6 +31,7 @@ public:
 
 	// Functions
 
+	void endApplication();
 	void updateDt();
 	void updateSFMLEvents();
 	void update();

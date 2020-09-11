@@ -54,6 +54,10 @@ Game::~Game() {
 
 // Functions
 
+void Game::endApplication() {
+	std::cout << "Ending application" << std::endl;
+}
+
 void Game::updateDt() {
 	// Updates the dt variable with the time it takes to update and render one frame.
 
@@ -73,8 +77,19 @@ void Game::update() {
 
 	this->updateSFMLEvents();
 
-	if (!this->states.empty())
+	if (!this->states.empty()) {
 		this->states.top()->update(this->dt);
+
+		if (this->states.top()->getQuit()) {
+			this->states.top()->endState();
+			delete this->states.top();
+			this->states.pop();
+		}
+	// Application End
+	} else {
+		this->endApplication();
+		this->window->close();
+	}
 }
 
 void Game::render() {
@@ -82,7 +97,7 @@ void Game::render() {
 
 	// Render Items
 
-	if (this->states.empty())
+	if (!this->states.empty())
 		this->states.top()->render(this->window);
 
 	this->window->display();
@@ -95,3 +110,5 @@ void Game::run() {
 		this->render();
 	}
 }
+
+// hezigonic was here
