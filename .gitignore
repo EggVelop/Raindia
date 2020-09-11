@@ -1,11 +1,14 @@
 # Project-Specific ignores
-*.tlog
-*.log
 Debug/
 Release/
+External/
+.vs/
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
+*.log
+*.tlog
+*.sln
 
 # Prerequisites
 *.d
