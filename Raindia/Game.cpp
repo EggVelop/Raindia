@@ -9,7 +9,27 @@
 void Game::initWindow() {
 	// Creates a SFML Window using options from a window.ini file.
 
-	this->window = new sf::RenderWindow(sf::VideoMode(800, 600), "Hello World in SFML!");
+	std::ifstream ifs("Config/window.ini");
+
+	// Defaults
+
+	std::string title = "None";
+	sf::VideoMode window_bounds(800, 600);
+	unsigned framerate_limit = 120;
+	bool vertical_sync_enabled = false;
+
+	if (ifs.is_open()) {
+		std::getline(ifs, title);
+		ifs >> window_bounds.width >> window_bounds.height;
+		ifs >> framerate_limit;
+		ifs >> vertical_sync_enabled;
+	}
+
+	ifs.close();
+
+	this->window = new sf::RenderWindow(window_bounds, title);
+	this->window->setFramerateLimit(framerate_limit);
+	this->window->setVerticalSyncEnabled(vertical_sync_enabled);
 }
 
 // Constructors / Destructors
