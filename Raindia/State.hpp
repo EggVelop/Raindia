@@ -37,4 +37,3 @@ public:
 };
 
 #endif
-#pragma once
