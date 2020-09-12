@@ -19,6 +19,6 @@ void State::checkForQuit() {
 	}
 }
 
-void State::updateKeybinds(const float& dt) {
+void State::updateInput(const float& dt) {
 
 }

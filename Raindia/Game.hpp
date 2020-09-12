@@ -3,8 +3,7 @@
 
 #include "GameState.hpp"
 
-class Game
-{
+class Game {
 private:
 
 	// Variables
